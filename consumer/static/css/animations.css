@@ -1,0 +1,146 @@
+
+/* ===== LocalWorks: Global Animations ===== */
+
+@keyframes pageFade {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes softGlow {
+    0%, 100% {
+        box-shadow: 0 0 0 rgba(232, 189, 96, 0);
+    }
+    50% {
+        box-shadow: 0 0 18px rgba(232, 189, 96, 0.12);
+    }
+}
+
+@keyframes goldShine {
+    from {
+        background-position: 0% 50%;
+    }
+    to {
+        background-position: 200% 50%;
+    }
+}
+
+/* Smooth page appearance */
+body {
+    animation: pageFade 0.55s ease-out both;
+}
+
+/* Headings */
+h1, h2 {
+    animation: pageFade 0.65s ease-out both;
+}
+
+/* Navigation links */
+.nav-links a {
+    position: relative;
+    transition: color 0.25s ease;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 2px;
+    background: #e8bd60;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #e8bd60;
+}
+
+.nav-links a:hover::after {
+    transform: scaleX(1);
+}
+
+/* Buttons */
+button,
+.worker-button {
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
+}
+
+button:hover,
+.worker-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(232, 189, 96, 0.18);
+}
+
+button:active,
+.worker-button:active {
+    transform: scale(0.98);
+}
+
+/* Cards */
+.worker-card,
+.service-card,
+.booking-card,
+.work-card {
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.worker-card:hover,
+.service-card:hover,
+.booking-card:hover,
+.work-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+}
+
+/* Form inputs */
+input,
+textarea,
+select {
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #e8bd60;
+    box-shadow: 0 0 0 3px rgba(232, 189, 96, 0.12);
+}
+
+/* Images */
+.worker-image img,
+img {
+    transition: transform 0.35s ease;
+}
+
+.worker-card:hover .worker-image img {
+    transform: scale(1.04);
+}
+
+/* Respect accessibility settings */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

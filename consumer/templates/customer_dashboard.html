@@ -1,0 +1,156 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Customer Dashboard | Local Service{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/customer-dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="customer-dashboard">
+
+    <section class="customer-hero">
+        <div class="customer-hero-content">
+            <span class="customer-eyebrow">CUSTOMER PORTAL</span>
+            <h1>Welcome, {{ request.user.username }}!</h1>
+            <p>Manage your bookings and stay updated with your services.</p>
+            <a href="{% url 'booking' %}" class="customer-primary-btn">
+                + Book a Service
+            </a>
+        </div>
+        <div class="customer-hero-icon">✦</div>
+    </section>
+
+    <section class="customer-stats">
+        <div class="customer-stat-card">
+            <div class="customer-stat-icon">▤</div>
+            <p>Total Bookings</p>
+            <h2>{{ bookings.count }}</h2>
+            <span>Your service requests</span>
+        </div>
+
+        <div class="customer-stat-card">
+            <div class="customer-stat-icon">♧</div>
+            <p>Unread Notifications</p>
+            <h2>{{ unread_count }}</h2>
+            <span>Updates waiting for you</span>
+        </div>
+    </section>
+
+    <section class="customer-panel" id="notifications">
+        <div class="customer-section-heading">
+            <div>
+                <span class="customer-eyebrow">STAY UPDATED</span>
+                <h2>Notifications</h2>
+            </div>
+
+            {% if unread_count > 0 %}
+            <form method="POST" action="{% url 'mark_notifications_read' %}">
+                {% csrf_token %}
+                <button type="submit" class="customer-outline-btn">
+                    Mark all as read
+                </button>
+            </form>
+            {% endif %}
+        </div>
+
+        <div class="customer-list">
+            {% for notification in notifications %}
+            <article class="customer-notification">
+                <div class="customer-list-icon">♧</div>
+
+                <div class="customer-list-content">
+                    <p>{{ notification.message }}</p>
+                    <small>{{ notification.created_at|date:"d M Y, h:i A" }}</small>
+                </div>
+
+                {% if not notification.is_read %}
+                <span class="customer-new-badge">NEW</span>
+                {% endif %}
+            </article>
+            {% empty %}
+            <div class="customer-empty">
+                <span>♧</span>
+                <h3>All quiet for now</h3>
+                <p>Your notifications will appear here.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="customer-panel">
+        <div class="customer-section-heading">
+            <div>
+                <span class="customer-eyebrow">YOUR ACTIVITY</span>
+                <h2>Booking History</h2>
+            </div>
+            <span class="customer-total">{{ bookings.count }} bookings</span>
+        </div>
+
+        <div class="customer-booking-list">
+            {% for booking in bookings %}
+            <article class="customer-booking-card">
+                <div class="customer-booking-top">
+                    <div class="customer-booking-icon">⌂</div>
+                    <div class="customer-list-content">
+                        <h3>{{ booking.work_name }}</h3>
+                        <p>Service booking</p>
+                    </div>
+
+                    <span class="customer-status
+                        {% if booking.status == 'Accepted' or booking.status == 'Confirmed' or booking.status == 'Completed' %}
+                            status-success
+                        {% elif booking.status == 'Rejected' or booking.status == 'Cancelled' %}
+                            status-danger
+                        {% else %}
+                            status-pending
+                        {% endif %}">
+                        {{ booking.status }}
+                    </span>
+                </div>
+
+                <div class="customer-booking-details">
+                    <div>
+                        <span>Date</span>
+                        <p>{{ booking.booking_date|date:"d M Y" }}</p>
+                    </div>
+                    <div>
+                        <span>Time</span>
+                        <p>{{ booking.booking_time|time:"h:i A" }}</p>
+                    </div>
+                </div>
+
+                <div class="customer-booking-description">
+                    <span>Work details</span>
+                    <p>{{ booking.work_details }}</p>
+                </div>
+            </article>
+            {% empty %}
+            <div class="customer-empty">
+                <span>▤</span>
+                <h3>No bookings yet</h3>
+                <p>Your service bookings will appear here once you book.</p>
+                <a href="{% url 'booking' %}" class="customer-primary-btn">
+                    Book Your First Service
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <div class="customer-bottom-cta">
+        <div>
+            <h2>Need another service?</h2>
+            <p>Find the right local professional for your next job.</p>
+        </div>
+        <a href="{% url 'booking' %}" class="customer-primary-btn">
+            Book a Service →
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,99 @@
+```html
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Available Services | Local Service{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/works.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="available-services">
+
+    <div class="services-hero">
+        <span class="services-label">LOCAL SERVICE • TRUSTED PROFESSIONALS</span>
+        <h1>Available <span>Services</span></h1>
+        <p>Find the right professional for your home. Quality service, right at your doorstep.</p>
+    </div>
+
+    <div class="services-grid">
+
+        <article class="service-card">
+            <div class="service-icon">🔧</div>
+            <span class="service-number">01 / PLUMBING</span>
+            <h2>Plumber</h2>
+            <p>Tap repair, pipe fitting and water leakage solutions.</p>
+            <div class="service-footer">
+                <div class="service-price"><small>Starting from</small><strong>₹300</strong></div>
+                <a href="/booking/" class="book-btn">Book Now <span>↗</span></a>
+            </div>
+        </article>
+
+        <article class="service-card">
+            <div class="service-icon">⚡</div>
+            <span class="service-number">02 / ELECTRICAL</span>
+            <h2>Electrician</h2>
+            <p>Electrical repairs, wiring and fan installation.</p>
+            <div class="service-footer">
+                <div class="service-price"><small>Starting from</small><strong>₹250</strong></div>
+                <a href="/booking/" class="book-btn">Book Now <span>↗</span></a>
+            </div>
+        </article>
+
+        <article class="service-card">
+            <div class="service-icon">🧹</div>
+            <span class="service-number">03 / CLEANING</span>
+            <h2>Cleaning</h2>
+            <p>Professional home cleaning and room cleaning services.</p>
+            <div class="service-footer">
+                <div class="service-price"><small>Starting from</small><strong>₹500</strong></div>
+                <a href="/booking/" class="book-btn">Book Now <span>↗</span></a>
+            </div>
+        </article>
+
+        <article class="service-card">
+            <div class="service-icon">🎨</div>
+            <span class="service-number">04 / PAINTING</span>
+            <h2>Painter</h2>
+            <p>Wall painting and home painting services.</p>
+            <div class="service-footer">
+                <div class="service-price"><small>Starting from</small><strong>₹800</strong></div>
+                <a href="/booking/" class="book-btn">Book Now <span>↗</span></a>
+            </div>
+        </article>
+
+        <article class="service-card">
+            <div class="service-icon">❄️</div>
+            <span class="service-number">05 / AIR CONDITIONING</span>
+            <h2>AC Technician</h2>
+            <p>AC servicing, maintenance and installation.</p>
+            <div class="service-footer">
+                <div class="service-price"><small>Starting from</small><strong>₹400</strong></div>
+                <a href="/booking/" class="book-btn">Book Now <span>↗</span></a>
+            </div>
+        </article>
+
+        <article class="service-card">
+            <div class="service-icon">🪚</div>
+            <span class="service-number">06 / CARPENTRY</span>
+            <h2>Carpenter</h2>
+            <p>Door repair, furniture repair and fitting services.</p>
+            <div class="service-footer">
+                <div class="service-price"><small>Starting from</small><strong>₹350</strong></div>
+                <a href="/booking/" class="book-btn">Book Now <span>↗</span></a>
+            </div>
+        </article>
+
+    </div>
+
+    <div class="services-bottom">
+        <span>YOUR HOME. OUR PRIORITY.</span>
+        <p>Reliable local professionals, just one booking away.</p>
+    </div>
+
+</section>
+
+{% endblock %}
+```

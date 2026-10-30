@@ -1,0 +1,53 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Our Workers | LocalWorks{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/workers.css' %}">
+
+<section class="workers-page">
+    <div class="workers-heading">
+        <p class="workers-tag">LOCALWORKS PROFESSIONALS</p>
+        <h1>Meet Our <span>Workers</span></h1>
+        <p>Find trusted professionals for your everyday needs.</p>
+    </div>
+
+    <div class="workers-grid">
+        {% for work in workers %}
+            <article class="worker-card">
+                <div class="worker-image">
+                    {% if work.image %}
+                        <img src="{{ work.image.url }}" alt="{{ work.name }}">
+                    {% else %}
+                        <div class="worker-placeholder">👤</div>
+                    {% endif %}
+                </div>
+
+                <div class="worker-info">
+                    <span class="worker-badge">LOCAL PROFESSIONAL</span>
+                    <h2>{{ work.name }}</h2>
+                    <p class="worker-role">{{ work.role }}</p>
+
+                    <div class="worker-contact">
+                        <span>☎</span>
+                        <span>{{ work.number }}</span>
+                    </div>
+
+                    <a class="worker-button"
+                       href="{% url 'booking' %}">
+                        Book a Service <span>→</span>
+                    </a>
+                </div>
+            </article>
+        {% empty %}
+            <div class="workers-empty">
+                <span>👷</span>
+                <h2>No workers available yet</h2>
+                <p>Please check again later.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
