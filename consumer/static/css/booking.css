@@ -1,0 +1,151 @@
+
+/* ===== PREMIUM BLACK & GOLD BOOKING POPUP ===== */
+
+.booking-alert-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(8px);
+    animation: overlayFade 0.3s ease;
+}
+
+.booking-alert-box {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    padding: 38px 30px 30px;
+    box-sizing: border-box;
+
+    border: 1px solid rgba(230, 187, 94, 0.4);
+    border-radius: 20px;
+    background: linear-gradient(145deg, #1b1b1b, #101010);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+
+    text-align: center;
+    color: #ffffff;
+    animation: popupEnter 0.4s ease;
+}
+
+/* GOLD SUCCESS ICON */
+
+.booking-alert-box h2::before {
+    content: "✓";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 66px;
+    height: 66px;
+    margin: 0 auto 22px;
+
+    border-radius: 50%;
+    background: rgba(230, 187, 94, 0.12);
+    border: 2px solid #e6bb5e;
+    color: #e6bb5e;
+
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.booking-alert-box h2 {
+    margin: 0 0 14px;
+    color: #e6bb5e;
+    font-size: 27px;
+    font-weight: 750;
+    letter-spacing: -0.5px;
+}
+
+.booking-alert-box p {
+    margin: 0 0 26px;
+    color: #d0d0d0;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* CLOSE BUTTON */
+
+.booking-alert-box #alertClose {
+    position: absolute;
+    top: 13px;
+    right: 15px;
+
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid rgba(230, 187, 94, 0.2);
+    border-radius: 50%;
+    background: #222222;
+    color: #e6bb5e;
+
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.booking-alert-box #alertClose:hover {
+    background: #302719;
+    color: #f4d58c;
+}
+
+/* GOLD OK BUTTON */
+
+.booking-alert-box #alertOk {
+    width: 100%;
+    padding: 14px 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: linear-gradient(135deg, #f4d58c, #e6bb5e);
+    color: #101010;
+
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.booking-alert-box #alertOk:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(230, 187, 94, 0.2);
+}
+
+.booking-alert-box #alertOk:active {
+    transform: scale(0.98);
+}
+
+/* ANIMATIONS */
+
+@keyframes overlayFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes popupEnter {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+    .booking-alert-box {
+        padding: 35px 22px 24px;
+    }
+
+    .booking-alert-box h2 {
+        font-size: 23px;
+    }
+}
+

@@ -1,0 +1,223 @@
+
+{% extends "base.html" %}
+
+{% block title %}Worker Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="notification-bell">
+    <a href="#notifications" title="Notifications">
+        🔔
+        {% if unread_count %}
+            <span class="notification-count">
+                {{ unread_count }}
+            </span>
+        {% endif %}
+    </a>
+</div>
+
+<div class="worker-page">
+
+    <section class="worker-hero">
+        <div>
+            <p class="eyebrow">WORKER PORTAL</p>
+            <h1>Welcome, {{ request.user.username }}!</h1>
+            <p>Manage your services and customer bookings.</p>
+        </div>
+        <div class="hero-icon">🔧</div>
+    </section>
+
+    <!-- Dashboard Statistics -->
+    <section class="worker-stats">
+
+        <div class="stat-card">
+            <span>🛠️</span>
+            <p>My Services</p>
+            <h2>{{ services.count }}</h2>
+        </div>
+
+        <div class="stat-card">
+            <span>📩</span>
+            <p>Total Bookings</p>
+            <h2>{{ bookings.count }}</h2>
+        </div>
+
+        <div class="stat-card">
+            <span>⏳</span>
+            <p>Pending Requests</p>
+            <h2>{{ pending_count }}</h2>
+        </div>
+
+    </section>
+
+    <!-- Add Service -->
+    <section class="worker-section">
+        <h2>➕ Add New Service</h2>
+
+        <form method="post" class="service-form">
+            {% csrf_token %}
+
+            <label>Service Name</label>
+            <input type="text" name="name"
+                   placeholder="Example: Plumbing" required>
+
+            <label>Description</label>
+            <textarea name="description"
+                      placeholder="Describe your service"
+                      rows="3" required></textarea>
+
+            <label>Price (₹)</label>
+            <input type="number" name="price"
+                   min="0" step="0.01"
+                   placeholder="500" required>
+
+            <button type="submit" name="action"
+                    value="add_service">
+                + Add Service
+            </button>
+        </form>
+    </section>
+
+    <!-- My Services -->
+    <section class="worker-section">
+        <h2>🛠️ My Services</h2>
+
+        <div class="worker-grid">
+            {% for service in services %}
+                <div class="worker-card">
+                    <h3>{{ service.name }}</h3>
+                    <p>{{ service.description }}</p>
+                    <h3 class="price">₹{{ service.price }}</h3>
+                </div>
+            {% empty %}
+                <p>You haven't added any services yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+<section class="worker-section" id="notifications">
+    <h2>🔔 Notifications</h2>
+
+    {% for notification in notifications %}
+        <div class="request-card">
+            <p>{{ notification.message }}</p>
+            <small>{{ notification.created_at }}</small>
+
+            {% if not notification.is_read %}
+                <span>🆕 New</span>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>No notifications yet.</p>
+    {% endfor %}
+</section>
+
+    <!-- Customer Booking Requests -->
+    <section class="worker-section">
+        <h2>📋 Customer Booking Requests</h2>
+
+        {% for booking in bookings %}
+            <div class="request-card">
+
+                <div class="request-details">
+                    <h3>
+                        {% if booking.service %}
+                            {{ booking.service.name }}
+                        {% else %}
+                            {{ booking.work_name|default:"Service Booking" }}
+                        {% endif %}
+                    </h3>
+
+                    <p>
+                        <strong>Customer:</strong>
+                        {{ booking.customer.username }}
+                    </p>
+
+                    <p>
+                        <strong>Mobile:</strong>
+                        {{ booking.customer_mobile|default:"Not provided" }}
+                    </p>
+
+                    <p>
+                        <strong>Date:</strong>
+                        {{ booking.booking_date|default:"Not specified" }}
+                    </p>
+
+                    <p>
+                        <strong>Time:</strong>
+                        {{ booking.booking_time|default:"Not specified" }}
+                    </p>
+
+                    <p>
+                        <strong>Details:</strong>
+                        {{ booking.details|default:booking.work_details|default:"No additional details" }}
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        {{ booking.status|default:"Pending" }}
+                    </p>
+                </div>
+
+                <!-- Accept / Reject -->
+                {% if booking.status == "Pending" or not booking.status %}
+                    <form method="post"
+                          action="{% url 'update_booking_status' booking.id %}"
+                          class="request-actions">
+
+                        {% csrf_token %}
+
+                        <button type="submit"
+                                name="action"
+                                value="accept">
+                            ✅ Accept
+                        </button>
+
+                        <button type="submit"
+                                name="action"
+                                value="reject">
+                            ❌ Reject
+                        </button>
+
+                    </form>
+
+                {% elif booking.status == "Accepted" %}
+                    <form method="post"
+                          action="{% url 'update_booking_status' booking.id %}"
+                          class="request-actions">
+
+                        {% csrf_token %}
+
+                        <button type="submit"
+                                name="action"
+                                value="complete">
+                            ✔ Mark Completed
+                        </button>
+
+                    </form>
+
+                {% elif booking.status == "Rejected" %}
+                    <p class="status-rejected">
+                        ❌ This booking was rejected.
+                    </p>
+
+                {% elif booking.status == "Completed" %}
+                    <p class="status-completed">
+                        ✅ Work completed successfully.
+                    </p>
+                {% endif %}
+
+            </div>
+
+        {% empty %}
+            <div class="empty-bookings">
+                <h3>📭 No bookings yet</h3>
+                <p>Customer booking requests will appear here.</p>
+            </div>
+        {% endfor %}
+
+    </section>
+
+</div>
+
+{% endblock %}

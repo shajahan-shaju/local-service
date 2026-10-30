@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <p class="small-title">YOUR LOCAL SERVICE PARTNER</p>
+
+            <h1>
+                Find Trusted Workers
+                <br>
+                <span>Near You</span>
+            </h1>
+
+            <p class="hero-text">
+                Book reliable professionals for your home and personal
+                services. Fast, simple and trusted.
+            </p>
+
+            <!-- Search Box -->
+            <div class="search-box">
+
+                <input 
+                    type="text" 
+                    placeholder="What service do you need?"
+                >
+
+                <select>
+                    <option>Select Location</option>
+                    <option>Coimbatore</option>
+                    <option>Chennai</option>
+                    <option>Madurai</option>
+                    <option>Salem</option>
+                </select>
+
+                <button>Search</button>
+
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+            <div class="image-card">
+                <div class="worker-icon">👨‍🔧</div>
+                <h3>Professional Workers</h3>
+                <p>Verified & Trusted</p>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- Services Section -->
+    <section class="services">
+
+        <div class="section-title">
+            <p>OUR SERVICES</p>
+            <h2>What Service Do You Need?</h2>
+            <span>
+                Choose from our wide range of professional services.
+            </span>
+        </div>
+
+
+        <div class="service-container">
+
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3>Plumber</h3>
+                <p>Professional plumbing services for your home.</p>
+                <a href="services.html">View Service →</a>
+            </div>
+
+
+            <div class="service-card">
+                <div class="service-icon">⚡</div>
+                <h3>Electrician</h3>
+                <p>Get reliable electrical repair and installation.</p>
+                <a href="services.html">View Service →</a>
+            </div>
+
+
+            <div class="service-card">
+                <div class="service-icon">🧹</div>
+                <h3>Cleaning</h3>
+                <p>Professional home and office cleaning services.</p>
+                <a href="services.html">View Service →</a>
+            </div>
+
+
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3>Painter</h3>
+                <p>Give your home a fresh and beautiful look.</p>
+                <a href="services.html">View Service →</a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+
+        <div class="section-title">
+            <p>HOW IT WORKS</p>
+            <h2>Book a Service in 3 Easy Steps</h2>
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step">
+                <div class="step-number">01</div>
+                <h3>Choose a Service</h3>
+                <p>Select the service you need from our service list.</p>
+            </div>
+
+
+            <div class="step">
+                <div class="step-number">02</div>
+                <h3>Choose a Worker</h3>
+                <p>Check worker profiles, ratings and experience.</p>
+            </div>
+
+
+            <div class="step">
+                <div class="step-number">03</div>
+                <h3>Book & Relax</h3>
+                <p>Confirm your booking and let our professional help you.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Why Choose Us -->
+    <section class="why-us">
+
+        <div class="why-content">
+
+            <p>WHY CHOOSE US</p>
+
+            <h2>
+                Reliable Service at
+                <span>Your Fingertips</span>
+            </h2>
+
+            <p>
+                We connect customers with trusted local professionals.
+                Our platform makes finding and booking workers simple,
+                quick and convenient.
+            </p>
+
+            <div class="features">
+
+                <div>
+                    <strong>✓</strong>
+                    <span>Verified Workers</span>
+                </div>
+
+                <div>
+                    <strong>✓</strong>
+                    <span>Easy Booking</span>
+                </div>
+
+                <div>
+                    <strong>✓</strong>
+                    <span>Affordable Pricing</span>
+                </div>
+
+                <div>
+                    <strong>✓</strong>
+                    <span>Customer Support</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Call To Action -->
+    <section class="cta">
+
+        <h2>Need a Professional Service?</h2>
+
+        <p>
+            Find the right worker and book your service today.
+        </p>
+
+        <a href="services.html">Explore Services</a>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="footer-content">
+
+            <div>
+                <h2>Local<span>Works</span></h2>
+                <p>
+                    Connecting customers with trusted local workers.
+                </p>
+            </div>
+
+            <div>
+                <h3>Quick Links</h3>
+                <a href="home.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="workers.html">Workers</a>
+                <a href="about.html">About</a>
+            </div>
+
+            <div>
+                <h3>Contact</h3>
+                <p>📍 Coimbatore, Tamil Nadu</p>
+                <p>📞 +91 98765 43210</p>
+                <p>✉ support@localworks.com</p>
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            © 2026 LocalWorks. All Rights Reserved.
+        </div>
+
+    </footer>
+
+
+
+{% endblock %}

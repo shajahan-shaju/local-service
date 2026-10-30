@@ -1,0 +1,46 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<body>
+
+<div class="login-container">
+    <div class="login-box">
+        <div class="logo">LS</div>
+
+        <h1>Welcome Back!</h1>
+        <p>Login to book your local services</p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p class="message">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username"
+                   placeholder="Enter your username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"
+                   placeholder="Enter your password" required>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <p class="signup-text">
+            Don't have an account?
+            <a href="{% url 'login' %}">Create Account</a>
+        </p>
+
+        <a class="back-home" href="/">← Back to Home</a>
+    </div>
+</div>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Local Service{% endblock %}</title>
+
+    {% load static %}
+
+    <!-- Common CSS for the entire project -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/work.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animations.css' %}">
+    <link rel="stylesheet" href="{% static 'css/premium-cards.css' %}">
+    <link rel="stylesheet" href="{% static 'css/worker_dashboard.css' %}">
+    
+    <!-- Booking page CSS only -->
+    {% if request.path == '/booking/' %}
+        <link rel="stylesheet" href="{% static 'css/booking.css' %}">
+    {% endif %}
+
+    <!-- Home page CSS only -->
+    {% if request.path == '/' %}
+        <link rel="stylesheet" href="{% static 'css/home-new.css' %}">
+    {% endif %}
+
+    <!-- Shared navbar CSS -->
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- COMMON NAVBAR -->
+    <nav class="navbar">
+        <a href="/" class="logo">
+            local <span>service.</span>
+        </a>
+
+        
+<ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/workers/">Workers</a></li>
+    <li><a href="/works/">Works</a></li>
+    <li><a href="/booking/">Booking</a></li>
+   
+
+    <li>
+        <a href="{% url 'customer_dashboard' %}" class="dashboard-link">
+            My Dashboard
+        </a>
+    </li>
+    <li><a href="/worker_dashboard/">Worker Dashboard</a></li>
+<li><a href="{% url 'worker_login' %}">Worker Login</a></li>
+<li><a href="{% url 'worker_register' %}">Worker Register</a></li>
+    <li><a href="/singup/">Login / Sign Up</a></li>
+</ul>
+{% if user.is_authenticated and not request.user.worker_profile %}
+<li>
+    <a href="{% url 'customer_logout' %}">Customer Logout</a>
+</li>
+{% endif %}
+
+    </nav>
+
+    <!-- PAGE CONTENT -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- COMMON FOOTER -->
+    <footer class="footer">
+        <p>© 2026 Local Service | Fast & Reliable Work</p>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

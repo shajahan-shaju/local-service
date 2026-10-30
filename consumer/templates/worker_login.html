@@ -1,0 +1,133 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Worker Login | Local Service{% endblock %}
+
+{% block extra_css %}
+<style>
+.worker-login-section {
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+    background: #0b0b0d;
+}
+.worker-login-card {
+    width: 100%;
+    max-width: 440px;
+    padding: 38px;
+    border: 1px solid #b99142;
+    border-radius: 18px;
+    background: #151515;
+    color: #fff;
+    box-shadow: 0 15px 45px rgba(0,0,0,.35);
+}
+.worker-login-card h1 {
+    text-align: center;
+    color: #e2bb62;
+    margin-bottom: 8px;
+}
+.worker-login-card .subtitle {
+    text-align: center;
+    color: #bbb;
+    margin-bottom: 28px;
+}
+.worker-login-card label {
+    display: block;
+    margin: 16px 0 7px;
+    color: #eee;
+}
+.worker-login-card input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background: #222;
+    color: white;
+}
+.worker-login-card input:focus {
+    outline: 1px solid #e2bb62;
+    border-color: #e2bb62;
+}
+.worker-login-card button {
+    width: 100%;
+    margin-top: 24px;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #f0d58b, #b88a2e);
+    color: #111;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.worker-login-card button:hover {
+    opacity: .9;
+}
+.worker-login-card .error {
+    padding: 10px;
+    border-radius: 7px;
+    background: #3a1717;
+    color: #ffaaaa;
+}
+.worker-login-card .register-link {
+    text-align: center;
+    margin-top: 22px;
+    color: #ccc;
+}
+.worker-login-card a {
+    color: #e2bb62;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="worker-login-section">
+    <div class="worker-login-card">
+        <h1>Worker Login</h1>
+        <p class="subtitle">Welcome back to Local Service</p>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label for="username">Username</label>
+            <input
+                type="text"
+                id="username"
+                name="username"
+                autocomplete="username"
+                required
+            >
+
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                autocomplete="current-password"
+                required
+            >
+
+            <button type="submit">Login as Worker</button>
+        </form>
+
+        <p class="register-link">
+            New worker?
+            <a href="{% url 'worker_register' %}">Create an account</a>
+        </p>
+    </div>
+</section>
+{% endblock %}
