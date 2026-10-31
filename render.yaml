@@ -1,0 +1,22 @@
+databases:
+  - name: local-service-shajahan123-db
+    plan: free
+    databaseName: local_service_shajahan123
+    user: local_service_shajahan123
+
+services:
+  - type: web
+    name: local-service-shajahan123
+    runtime: python
+    plan: free
+    buildCommand: "bash build.sh"
+    startCommand: "python -m gunicorn Local_service.wsgi:application --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: local-service-shajahan123-db
+          property: connectionString
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "false"

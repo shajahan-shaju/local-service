@@ -39,3 +39,17 @@ the Django admin after deployment.
 7. Add worker records and uploaded images through the admin or application.
 
 Never commit `.env`, `db.sqlite3`, or uploaded `media/` files.
+
+## Deploy to Render
+
+The repository includes a Render Blueprint (`render.yaml`) that creates a
+Django web service and PostgreSQL database. Connect this GitHub repository in
+Render's Blueprint flow and apply the Blueprint. Render installs dependencies,
+collects static files, runs migrations, and starts Gunicorn during deployment.
+
+After the first deploy, create an administrator from the Render Shell with
+`python manage.py createsuperuser`. Uploaded media files use the web service's
+local filesystem; use external object storage if uploaded files must survive
+service replacement or redeployment. Render's free web services can spin down
+when idle, and free PostgreSQL databases expire after 30 days, so use a paid
+database for data that must persist long term.
